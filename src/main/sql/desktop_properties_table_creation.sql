@@ -3,4 +3,4 @@ create table desktop_properties (
                                     type tinyint check (type in (1,2,3)));
 ALTER TABLE desktop_properties
     ADD FOREIGN KEY (desktop_id)
-        REFERENCES device(DEVICE_ID);
+        REFERENCES device(DEVICE_ID) on delete cascade;

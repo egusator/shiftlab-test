@@ -6,8 +6,8 @@ public class Laptop extends abstractDevice {
     private Byte size;
 
     public Laptop(int desktopId, String serialNumber, BigDecimal price,
-                   int quantityInStock, Byte size) {
-        super(desktopId, serialNumber, price, quantityInStock);
+                   int quantityInStock,  Byte type ,Byte size) {
+        super(desktopId, serialNumber, price, quantityInStock, type);
         this.size = size;
     }
     public Laptop() {}

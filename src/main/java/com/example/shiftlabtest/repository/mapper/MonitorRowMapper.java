@@ -15,6 +15,7 @@ public class MonitorRowMapper implements RowMapper<Monitor> {
                 rs.getString("serial_number"),
                 rs.getBigDecimal("price"),
                 rs.getInt("quantity_in_stock"),
+                rs.getByte("device_type"),
                 rs.getShort("diagonal"));
         return monitor;
     }

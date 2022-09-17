@@ -13,6 +13,7 @@ public class HardDiskRowMapper implements RowMapper<HardDisk> {
                 rs.getString("serial_number"),
                 rs.getBigDecimal("price"),
                 rs.getInt("quantity_in_stock"),
+                rs.getByte("device_type"),
                 rs.getInt("capacity"));
         return hardDisk;
     }

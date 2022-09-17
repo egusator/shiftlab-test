@@ -14,6 +14,7 @@ public class DesktopRowMapper implements RowMapper<Desktop> {
                                         rs.getString("serial_number"),
                                             rs.getBigDecimal("price"),
                                                 rs.getInt("quantity_in_stock"),
+                                                    rs.getByte("device_type"),
                                                     rs.getByte("form_factor"));
         return desktop;
     }

@@ -15,6 +15,7 @@ public class LaptopRowMapper implements RowMapper<Laptop> {
                 rs.getString("serial_number"),
                 rs.getBigDecimal("price"),
                 rs.getInt("quantity_in_stock"),
+                rs.getByte("device_type"),
                 rs.getByte("size"));
         return laptop;
     }

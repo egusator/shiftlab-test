@@ -6,8 +6,8 @@ public class Desktop extends abstractDevice {
     private Byte formFactor;
 
     public Desktop(int desktopId, String serialNumber, BigDecimal price,
-                    int quantityInStock, Byte formFactor) {
-        super(desktopId, serialNumber, price, quantityInStock);
+                    int quantityInStock, Byte type, Byte formFactor) {
+        super(desktopId, serialNumber, price, quantityInStock, type);
         this.formFactor = formFactor;
     }
     public Desktop() {}

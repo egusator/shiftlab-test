@@ -8,11 +8,21 @@ public abstract class abstractDevice {
     private BigDecimal price;
     private int quantityInStock;
 
-    public abstractDevice(int desktopId, String serialNumber, BigDecimal price, int quantityInStock) {
+    private Byte type;
+    public abstractDevice(int desktopId, String serialNumber, BigDecimal price, int quantityInStock, Byte type) {
         this.deviceId = desktopId;
         this.serialNumber = serialNumber;
         this.price = price;
         this.quantityInStock = quantityInStock;
+        this.type = type;
+    }
+
+    public Byte getType() {
+        return type;
+    }
+
+    public void setType(Byte type) {
+        this.type = type;
     }
 
     public abstractDevice() {
