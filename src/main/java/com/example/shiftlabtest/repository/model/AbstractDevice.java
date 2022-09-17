@@ -2,14 +2,14 @@ package com.example.shiftlabtest.repository.model;
 
 import java.math.BigDecimal;
 
-public abstract class abstractDevice {
+public abstract class AbstractDevice {
     private int deviceId;
     private String serialNumber;
     private BigDecimal price;
     private int quantityInStock;
 
     private Byte type;
-    public abstractDevice(int desktopId, String serialNumber, BigDecimal price, int quantityInStock, Byte type) {
+    public AbstractDevice(int desktopId, String serialNumber, BigDecimal price, int quantityInStock, Byte type) {
         this.deviceId = desktopId;
         this.serialNumber = serialNumber;
         this.price = price;
@@ -25,7 +25,7 @@ public abstract class abstractDevice {
         this.type = type;
     }
 
-    public abstractDevice() {
+    public AbstractDevice() {
     }
     public int getDeviceId() {
         return deviceId;

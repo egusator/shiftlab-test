@@ -2,7 +2,7 @@ package com.example.shiftlabtest.repository.model;
 
 import java.math.BigDecimal;
 
-public class HardDisk extends abstractDevice {
+public class HardDisk extends AbstractDevice {
     private int capacity;
 
     public HardDisk(int desktopId, String serialNumber, BigDecimal price, int quantityInStock,  Byte type,

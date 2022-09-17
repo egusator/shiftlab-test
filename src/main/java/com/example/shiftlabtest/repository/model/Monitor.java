@@ -2,7 +2,7 @@ package com.example.shiftlabtest.repository.model;
 
 import java.math.BigDecimal;
 
-public class Monitor extends abstractDevice {
+public class Monitor extends AbstractDevice {
     private Short diagonal;
 
     public Monitor(int desktopId, String serialNumber, BigDecimal price, int quantityInStock, Byte type,

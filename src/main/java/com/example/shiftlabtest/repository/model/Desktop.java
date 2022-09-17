@@ -2,7 +2,7 @@ package com.example.shiftlabtest.repository.model;
 
 import java.math.BigDecimal;
 
-public class Desktop extends abstractDevice {
+public class Desktop extends AbstractDevice {
     private Byte formFactor;
 
     public Desktop(int desktopId, String serialNumber, BigDecimal price,
