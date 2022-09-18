@@ -2,21 +2,25 @@ package com.example.shiftlabtest.repository.impl;
 
 import com.example.shiftlabtest.repository.model.UnknownDevice;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.support.TransactionTemplate;
 
 import java.math.BigDecimal;
 import java.util.List;
-
+@Repository
 public abstract class AbstractDeviceRepository<T> {
-    protected final JdbcTemplate jdbcTemplate;
-    @Autowired
-    private RowMapper<UnknownDevice> rowMapper;
-@Autowired
-    public AbstractDeviceRepository(JdbcTemplate jdbcTemplate) {
-        this.jdbcTemplate = jdbcTemplate;
 
+    protected final JdbcTemplate jdbcTemplate;
+    protected final TransactionTemplate transactionTemplate;
+    @Autowired
+    public AbstractDeviceRepository(JdbcTemplate jdbcTemplate, TransactionTemplate transactionTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
+        this.transactionTemplate = transactionTemplate;
     }
+
 
     public void setDeviceQuantityById(int deviceId, int newQuantity) {
         final String sql = "UPDATE device SET quantity_in_stock = ? where device_id = ?";
@@ -53,16 +57,10 @@ public abstract class AbstractDeviceRepository<T> {
             preparedStatement.setInt(2, deviceId);
         });
     }
-    public void deleteDevice(int deviceId) {
-        final String sql = "delete from device where device_id = ?";
-        jdbcTemplate.update(sql, preparedStatement -> {
-           preparedStatement.setInt(1, deviceId);
-        });
-    }
 
-    public void addMainCharacteristics(String serialNumber, BigDecimal price, int quantityInStock, Byte type) {
-        final String mainCharacteristicsSql = "insert into device (serial_number, price, quantity_in_stock, device_type)" +
-                "values (?,?,?,?);";
+    public void addMainCharacteristics(String serialNumber, BigDecimal price, int quantityInStock, String manufacturerName, Byte type) {
+        final String mainCharacteristicsSql = "insert into device (serial_number, price, quantity_in_stock, MANUFACTURER_NAME, device_type)" +
+                "values (?,?,?,?,?);";
         jdbcTemplate.update(mainCharacteristicsSql,preparedStatement -> {
             preparedStatement.setString(1, serialNumber);
             preparedStatement.setBigDecimal(2, price);
@@ -73,15 +71,5 @@ public abstract class AbstractDeviceRepository<T> {
     }
     public abstract List<T> getAll();
 
-    public UnknownDevice getUnknownDeviceById(int deviceId) {
-        final String sql = "SELECT *\n" +
-                "FROM device\n" +
-                "         LEFT JOIN HARD_DISK_PROPERTIES HDP on DEVICE.DEVICE_ID = HDP.HARD_DISK_ID\n" +
-                "         LEFT JOIN DESKTOP_PROPERTIES DP on DEVICE.DEVICE_ID = DP.DESKTOP_ID\n" +
-                "         LEFT JOIN LAPTOP_PROPERTIES LP on DEVICE.DEVICE_ID = LP.LAPTOP_ID\n" +
-                "         LEFT JOIN MONITOR_PROPERTIES MP on DEVICE.DEVICE_ID = MP.MONITOR_ID\n" +
-                "WHERE\n" +
-                "    device.DEVICE_ID = ?\n";
-        return jdbcTemplate.query(sql, rowMapper).get(0);
-    }
+
 }

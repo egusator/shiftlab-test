@@ -3,10 +3,11 @@ package com.example.shiftlabtest.repository.mapper;
 import com.example.shiftlabtest.repository.model.HardDisk;
 import com.example.shiftlabtest.repository.model.Laptop;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Component;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
+@Component("hardDiskRowMapper")
 public class HardDiskRowMapper implements RowMapper<HardDisk> {
     public HardDisk mapRow(ResultSet rs, int rowNum) throws SQLException {
         HardDisk hardDisk = new HardDisk(rs.getInt("device_id"),

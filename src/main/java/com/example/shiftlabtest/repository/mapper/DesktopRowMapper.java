@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-@Component
+@Component("desktopRowMapper")
 public class DesktopRowMapper implements RowMapper<Desktop> {
     public Desktop mapRow(ResultSet rs, int rowNum) throws SQLException {
         Desktop desktop = new Desktop(rs.getInt("device_id"),

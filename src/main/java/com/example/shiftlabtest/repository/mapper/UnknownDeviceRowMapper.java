@@ -3,10 +3,11 @@ package com.example.shiftlabtest.repository.mapper;
 import com.example.shiftlabtest.repository.model.Monitor;
 import com.example.shiftlabtest.repository.model.UnknownDevice;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Component;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
+@Component("unknownDeviceRowMapper")
 public class UnknownDeviceRowMapper implements RowMapper<UnknownDevice> {
     @Override
     public UnknownDevice mapRow(ResultSet rs, int rowNum) throws SQLException {

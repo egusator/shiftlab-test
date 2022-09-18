@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-@Component
+@Component("laptopRowMapper")
 public class LaptopRowMapper implements RowMapper<Laptop> {
     public Laptop mapRow(ResultSet rs, int rowNum) throws SQLException {
         Laptop laptop = new Laptop(rs.getInt("device_id"),

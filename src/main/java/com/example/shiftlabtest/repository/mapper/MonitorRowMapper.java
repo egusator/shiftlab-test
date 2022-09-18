@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-@Component
+@Component("monitorRowMapper")
 public class MonitorRowMapper implements RowMapper<Monitor> {
     public Monitor mapRow(ResultSet rs, int rowNum) throws SQLException {
         Monitor monitor = new Monitor(rs.getInt("device_id"),
