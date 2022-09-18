@@ -4,4 +4,4 @@ create table monitor_properties (
 
 ALTER TABLE monitor_properties
     ADD FOREIGN KEY (monitor_id)
-        REFERENCES device(DEVICE_ID);
+        REFERENCES device(DEVICE_ID) on delete cascade;

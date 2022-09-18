@@ -4,4 +4,4 @@ create table laptop_properties (
 );
 ALTER TABLE laptop_properties
     ADD FOREIGN KEY (laptop_id)
-        REFERENCES device(DEVICE_ID);
+        REFERENCES device(DEVICE_ID) on delete cascade;

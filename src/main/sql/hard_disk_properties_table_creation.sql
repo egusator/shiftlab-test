@@ -4,4 +4,4 @@ create table hard_disk_properties (
 
 ALTER TABLE hard_disk_properties
     ADD FOREIGN KEY (hard_disk_id)
-        REFERENCES device(DEVICE_ID);
+        REFERENCES device(DEVICE_ID) on delete cascade;
