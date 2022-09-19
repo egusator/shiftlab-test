@@ -1,10 +1,9 @@
 package com.example.shiftlabtest.repository.impl;
 
-import com.example.shiftlabtest.repository.model.UnknownDevice;
+import com.example.shiftlabtest.repository.mapper.DeviceRowMapper;
+import com.example.shiftlabtest.repository.model.AbstractDevice;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.support.TransactionTemplate;
 
@@ -13,14 +12,15 @@ import java.util.List;
 @Repository
 public abstract class AbstractDeviceRepository<T> {
 
-    protected final JdbcTemplate jdbcTemplate;
-    protected final TransactionTemplate transactionTemplate;
-    @Autowired
+    private JdbcTemplate jdbcTemplate;
+    protected TransactionTemplate transactionTemplate;
+
+    protected static final DeviceRowMapper deviceRowMapper = new DeviceRowMapper();
+
     public AbstractDeviceRepository(JdbcTemplate jdbcTemplate, TransactionTemplate transactionTemplate) {
         this.jdbcTemplate = jdbcTemplate;
         this.transactionTemplate = transactionTemplate;
     }
-
 
     public void setDeviceQuantityById(int deviceId, int newQuantity) {
         final String sql = "UPDATE device SET quantity_in_stock = ? where device_id = ?";
@@ -36,7 +36,7 @@ public abstract class AbstractDeviceRepository<T> {
             preparedStatement.setInt(2, deviceId);
         });
     }
-    public void takeFromDeviceQuantityById(int deviceId, int quantity) {
+    public void decreaseDeviceQuantityById(int deviceId, int quantity) {
         final String sql = "UPDATE device SET quantity_in_stock = quantity_in_stock - ? where device_id = ?";
         jdbcTemplate.update(sql, preparedStatement -> {
             preparedStatement.setInt(1, quantity);
@@ -59,17 +59,22 @@ public abstract class AbstractDeviceRepository<T> {
     }
 
     public void addMainCharacteristics(String serialNumber, BigDecimal price, int quantityInStock, String manufacturerName, Byte type) {
-        final String mainCharacteristicsSql = "insert into device (serial_number, price, quantity_in_stock, MANUFACTURER_NAME, device_type)" +
-                "values (?,?,?,?,?);";
+        final String mainCharacteristicsSql = "insert into device (serial_number, price, quantity_in_stock, MANUFACTURER_NAME)" +
+                "values (?,?,?,?);";
         jdbcTemplate.update(mainCharacteristicsSql,preparedStatement -> {
             preparedStatement.setString(1, serialNumber);
             preparedStatement.setBigDecimal(2, price);
             preparedStatement.setInt(3, quantityInStock);
-            preparedStatement.setByte(4,type);
+            preparedStatement.setString(4, manufacturerName);
 
         });
     }
     public abstract List<T> getAll();
 
-
+    public void deleteDevice(int deviceId) {
+        final String sql = "delete from device where device_id = ?";
+        jdbcTemplate.update(sql, preparedStatement -> {
+            preparedStatement.setInt(1, deviceId);
+        });
+    }
 }

@@ -12,13 +12,16 @@ import java.util.List;
 @Repository
 public class MonitorRepository<Monitor> extends AbstractDeviceRepository  {
 
-    private final RowMapper<Monitor> monitorRowMapper;
+    private JdbcTemplate jdbcTemplate;
+
+
     @Autowired
     public MonitorRepository(JdbcTemplate jdbcTemplate,
-                             TransactionTemplate template, RowMapper<Monitor> monitorRowMapper) {
+                             TransactionTemplate template) {
         super(jdbcTemplate, template);
 
-        this.monitorRowMapper = monitorRowMapper;
+        this.jdbcTemplate = jdbcTemplate;
+
     }
 
 
@@ -36,8 +39,8 @@ public class MonitorRepository<Monitor> extends AbstractDeviceRepository  {
     }
     @Override
     public List<Monitor>getAll() {
-        final String sql = "select * from device join MONITOR_PROPERTIES on " +
+        final String sql = "select *, MONITOR_ID is not null as isMonitor from device join MONITOR_PROPERTIES on " +
                 "(device.device_id = MONITOR_PROPERTIES.monitor_id)";
-        return jdbcTemplate.query(sql, monitorRowMapper);
+        return (List<Monitor>) jdbcTemplate.query(sql, deviceRowMapper);
     }
 }

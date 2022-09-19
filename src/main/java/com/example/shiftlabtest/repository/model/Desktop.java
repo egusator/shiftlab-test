@@ -7,19 +7,11 @@ public class Desktop extends AbstractDevice {
 
     public Desktop(int desktopId, String serialNumber, BigDecimal price,
                     int quantityInStock, Byte type, String manufacturerName, Byte formFactor) {
-        super(desktopId, serialNumber, price, quantityInStock,manufacturerName ,type);
+        super(desktopId, serialNumber, price, quantityInStock,manufacturerName);
         this.formFactor = formFactor;
     }
 
-    public Desktop(UnknownDevice unknownDevice) {
-        super(unknownDevice.getDeviceId(),
-                unknownDevice.getSerialNumber(),
-                    unknownDevice.getPrice(),
-                        unknownDevice.getQuantityInStock(),
-                            unknownDevice.getManufacturerName(),
-                            unknownDevice.getType());
-        this.formFactor = unknownDevice.getFormFactor();
-    }
+
     public Desktop() {}
     public Byte getFormFactor() {
         return formFactor;

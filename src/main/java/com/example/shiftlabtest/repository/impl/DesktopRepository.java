@@ -12,12 +12,15 @@ import java.util.List;
 @Repository
 public class DesktopRepository<Desktop> extends AbstractDeviceRepository {
 
-    private final RowMapper<Desktop> desktopRowMapper;
+    private JdbcTemplate jdbcTemplate;
+
+
     @Autowired
-    public DesktopRepository(JdbcTemplate jdbcTemplate, RowMapper<Desktop> desktopRowMapper,
+    public DesktopRepository(JdbcTemplate jdbcTemplate,
                              TransactionTemplate template) {
         super(jdbcTemplate, template);
-        this.desktopRowMapper = desktopRowMapper;
+        this.jdbcTemplate = jdbcTemplate;
+
     }
 
 
@@ -37,8 +40,9 @@ public class DesktopRepository<Desktop> extends AbstractDeviceRepository {
 
     @Override
     public List<Desktop> getAll() {
-        final String sql = "select * from device join DESKTOP_PROPERTIES on " +
+        final String sql = "select *, desktop_id is not null as isDesktop" +
+                " from device join DESKTOP_PROPERTIES on " +
                 "(device.device_id = DESKTOP_PROPERTIES.desktop_id)";
-        return jdbcTemplate.query(sql, desktopRowMapper);
+        return (List<Desktop>) jdbcTemplate.query(sql, deviceRowMapper);
     }
 }

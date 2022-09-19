@@ -12,14 +12,15 @@ import java.util.List;
 @Repository
 public class HardDiskRepository<HardDisk> extends AbstractDeviceRepository {
 
+    private JdbcTemplate jdbcTemplate;
 
-    private final RowMapper<HardDisk> hardDiskRowMapper;
     @Autowired
-    public HardDiskRepository(JdbcTemplate jdbcTemplate, RowMapper<HardDisk> hardDiskRowMapper,
+    public HardDiskRepository(JdbcTemplate jdbcTemplate,
                              TransactionTemplate template) {
         super(jdbcTemplate, template);
 
-        this.hardDiskRowMapper = hardDiskRowMapper;
+        this.jdbcTemplate = jdbcTemplate;
+
     }
 
 
@@ -38,8 +39,8 @@ public class HardDiskRepository<HardDisk> extends AbstractDeviceRepository {
     }
     @Override
     public List<HardDisk> getAll() {
-        final String sql = "select * from device join HARD_DISK_PROPERTIES on " +
+        final String sql = "select *, HARD_DISK_id is not null as isHardDisk from device join HARD_DISK_PROPERTIES on " +
                 "(device.device_id = HARD_DISK_PROPERTIES.HARD_DISK_id)";
-        return jdbcTemplate.query(sql, hardDiskRowMapper);
+        return (List<HardDisk>) jdbcTemplate.query(sql, deviceRowMapper);
     }
 }

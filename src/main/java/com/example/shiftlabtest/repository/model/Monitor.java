@@ -7,17 +7,8 @@ public class Monitor extends AbstractDevice {
 
     public Monitor(int desktopId, String serialNumber, BigDecimal price, int quantityInStock,  String manufacturerName, Byte type,
                    Short diagonal) {
-        super(desktopId, serialNumber, price, quantityInStock, manufacturerName ,type);
+        super(desktopId, serialNumber, price, quantityInStock, manufacturerName);
         this.diagonal = diagonal;
-    }
-    public Monitor(UnknownDevice unknownDevice) {
-        super(unknownDevice.getDeviceId(),
-                unknownDevice.getSerialNumber(),
-                unknownDevice.getPrice(),
-                unknownDevice.getQuantityInStock(),
-                unknownDevice.getManufacturerName(),
-                unknownDevice.getType());
-        this.diagonal = unknownDevice.getDiagonal();
     }
 
     public Monitor() {

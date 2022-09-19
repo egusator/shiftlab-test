@@ -11,15 +11,16 @@ import java.util.List;
 @Repository
 public class LaptopRepository<Laptop> extends AbstractDeviceRepository {
 
+    private JdbcTemplate jdbcTemplate;
 
-    private final RowMapper<Laptop> laptopRowMapper;
 
     @Autowired
-    public LaptopRepository(JdbcTemplate jdbcTemplate, RowMapper<Laptop> laptopRowMapper,
+    public LaptopRepository(JdbcTemplate jdbcTemplate,
                              TransactionTemplate template) {
         super(jdbcTemplate, template);
 
-        this.laptopRowMapper = laptopRowMapper;
+        this.jdbcTemplate = jdbcTemplate;
+
     }
 
     public void addLaptop(String serialNumber, BigDecimal price, int quantityInStock, String manufacturerName,
@@ -37,8 +38,8 @@ public class LaptopRepository<Laptop> extends AbstractDeviceRepository {
     }
     @Override
     public List<Laptop> getAll() {
-        final String sql = "select * from device join LAPTOP_PROPERTIES on " +
+        final String sql = "select *, Laptop_ID is not null as isLaptop from device join LAPTOP_PROPERTIES on " +
                 "(device.device_id = LAPTOP_PROPERTIES.laptop_id)";
-        return jdbcTemplate.query(sql, laptopRowMapper);
+        return (List<Laptop>) jdbcTemplate.query(sql, deviceRowMapper);
     }
 }
