@@ -5,17 +5,6 @@ import java.math.BigDecimal;
 public class HardDisk extends AbstractDevice {
     private int capacity;
 
-    public HardDisk(int desktopId, String serialNumber, BigDecimal price, int quantityInStock,  String manufacturerName,
-                    Byte type, int capacity) {
-        super();
-        this.setDeviceId(desktopId);
-        this.setSerialNumber(serialNumber);
-        this.setPrice(price);
-        this.setQuantityInStock(quantityInStock);
-
-        this.capacity = capacity;
-    }
-
     public HardDisk() {
     }
 
