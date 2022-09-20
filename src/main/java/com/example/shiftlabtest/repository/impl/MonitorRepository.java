@@ -27,7 +27,7 @@ public class MonitorRepository<Monitor> extends AbstractDeviceRepository  {
 
     public void addMonitor(String serialNumber, BigDecimal price, int quantityInStock, String manufacturerName, int diagonal) {
         this.transactionTemplate.execute(status -> {
-            addMainCharacteristics(serialNumber, price, quantityInStock, manufacturerName, Byte.valueOf((byte)3));
+            addMainCharacteristics(serialNumber, price, quantityInStock, manufacturerName);
             final String addingDiagonalSql = "insert into MONITOR_PROPERTIES (MONITOR_ID, DIAGONAL) values " +
                     "((select device_id from device where serial_number = ?), ?)";
             jdbcTemplate.update(addingDiagonalSql, preparedStatement -> {

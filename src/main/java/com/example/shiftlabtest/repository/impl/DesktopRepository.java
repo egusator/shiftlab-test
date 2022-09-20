@@ -27,7 +27,7 @@ public class DesktopRepository<Desktop> extends AbstractDeviceRepository {
     public void addDesktop(String serialNumber, BigDecimal price, int quantityInStock,
                            String manufacturerName, Byte formFactor) {
         this.transactionTemplate.execute(status -> {
-            addMainCharacteristics(serialNumber, price, quantityInStock, manufacturerName, Byte.valueOf((byte)1));
+            addMainCharacteristics(serialNumber, price, quantityInStock, manufacturerName);
             final String addingFormFactorSql = "insert into DESKTOP_PROPERTIES (desktop_id,  form_factor) values " +
                     "((select device_id from device where serial_number = ?), ?)";
             jdbcTemplate.update(addingFormFactorSql, preparedStatement -> {

@@ -27,7 +27,7 @@ public class HardDiskRepository<HardDisk> extends AbstractDeviceRepository {
     public void addHardDisk(String serialNumber, BigDecimal price, int quantityInStock, String manufacturerName,
                            int capacity) {
         this.transactionTemplate.execute(status -> {
-            addMainCharacteristics(serialNumber, price, quantityInStock, manufacturerName, Byte.valueOf((byte)4));
+            addMainCharacteristics(serialNumber, price, quantityInStock, manufacturerName);
             final String addingFormFactorSql = "insert into HARD_DISK_PROPERTIES ( HARD_DISK_id, CAPACITY) values " +
                     "((select device_id from device where serial_number = ?), ?)";
             jdbcTemplate.update(addingFormFactorSql, preparedStatement -> {

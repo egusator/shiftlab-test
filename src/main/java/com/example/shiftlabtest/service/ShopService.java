@@ -78,6 +78,7 @@ public class ShopService {
         commonDeviceRepository.decreaseDeviceQuantityById(deviceId, amount);
     }
 
+
     public void setDevicePrice (int deviceId, BigDecimal price) {
         commonDeviceRepository.setDevicePriceById(deviceId, price);
     }

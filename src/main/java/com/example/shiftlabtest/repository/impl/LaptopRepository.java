@@ -26,7 +26,7 @@ public class LaptopRepository<Laptop> extends AbstractDeviceRepository {
     public void addLaptop(String serialNumber, BigDecimal price, int quantityInStock, String manufacturerName,
                           Byte size) {
         this.transactionTemplate.execute(status -> {
-            addMainCharacteristics(serialNumber, price, quantityInStock, manufacturerName, Byte.valueOf((byte)2));
+            addMainCharacteristics(serialNumber, price, quantityInStock, manufacturerName);
             final String addingDiagonalSql = "insert into LAPTOP_PROPERTIES (LAPTOP_ID, SIZE) values " +
                     "((select device_id from device where serial_number = ?), ?)";
             jdbcTemplate.update(addingDiagonalSql, preparedStatement -> {

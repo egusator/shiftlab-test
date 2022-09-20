@@ -1,9 +1,8 @@
-package com.example.shiftlabtest.repository.mapper;
+package com.example.shiftlabtest;
 
 import com.example.shiftlabtest.exceptions.CantParseDeviceException;
 import com.example.shiftlabtest.repository.model.*;
 import org.springframework.jdbc.core.RowMapper;
-import org.springframework.stereotype.Component;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -79,6 +78,7 @@ public class DeviceRowMapper implements RowMapper<AbstractDevice> {
         }
 
         throw new CantParseDeviceException();
+
 
 
     }

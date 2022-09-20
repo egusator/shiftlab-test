@@ -58,7 +58,7 @@ public abstract class AbstractDeviceRepository<T> {
         });
     }
 
-    public void addMainCharacteristics(String serialNumber, BigDecimal price, int quantityInStock, String manufacturerName, Byte type) {
+    public void addMainCharacteristics(String serialNumber, BigDecimal price, int quantityInStock, String manufacturerName) {
         final String mainCharacteristicsSql = "insert into device (serial_number, price, quantity_in_stock, MANUFACTURER_NAME)" +
                 "values (?,?,?,?);";
         jdbcTemplate.update(mainCharacteristicsSql,preparedStatement -> {
