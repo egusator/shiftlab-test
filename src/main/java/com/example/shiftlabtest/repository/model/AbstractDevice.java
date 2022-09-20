@@ -9,15 +9,6 @@ public abstract class AbstractDevice {
     private int quantityInStock;
     private String manufacturerName;
 
-    public AbstractDevice(int deviceId, String serialNumber, BigDecimal price, int quantityInStock, String manufacturerName) {
-        this.deviceId = deviceId;
-        this.serialNumber = serialNumber;
-        this.price = price;
-        this.quantityInStock = quantityInStock;
-        this.manufacturerName = manufacturerName;
-
-    }
-
 
 
     public String getManufacturerName() {

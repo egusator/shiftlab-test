@@ -5,11 +5,6 @@ import java.math.BigDecimal;
 public class Desktop extends AbstractDevice {
     private Byte formFactor;
 
-    public Desktop(int desktopId, String serialNumber, BigDecimal price,
-                    int quantityInStock, Byte type, String manufacturerName, Byte formFactor) {
-        super(desktopId, serialNumber, price, quantityInStock,manufacturerName);
-        this.formFactor = formFactor;
-    }
 
 
     public Desktop() {}

@@ -7,7 +7,12 @@ public class HardDisk extends AbstractDevice {
 
     public HardDisk(int desktopId, String serialNumber, BigDecimal price, int quantityInStock,  String manufacturerName,
                     Byte type, int capacity) {
-        super(desktopId, serialNumber, price, quantityInStock, manufacturerName);
+        super();
+        this.setDeviceId(desktopId);
+        this.setSerialNumber(serialNumber);
+        this.setPrice(price);
+        this.setQuantityInStock(quantityInStock);
+
         this.capacity = capacity;
     }
 

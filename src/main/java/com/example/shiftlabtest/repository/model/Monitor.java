@@ -5,12 +5,6 @@ import java.math.BigDecimal;
 public class Monitor extends AbstractDevice {
     private Short diagonal;
 
-    public Monitor(int desktopId, String serialNumber, BigDecimal price, int quantityInStock,  String manufacturerName, Byte type,
-                   Short diagonal) {
-        super(desktopId, serialNumber, price, quantityInStock, manufacturerName);
-        this.diagonal = diagonal;
-    }
-
     public Monitor() {
     }
 
